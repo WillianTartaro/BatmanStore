@@ -6,26 +6,34 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JButton;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class AbaCadastroCliente extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
+	private JTextField txtId;
+	private JTextField txtNome;
+	private JTextField txtTelefone;
+	private JTextField txtEndereco;
+	private JTextField txtCidade;
+	private JTextField txtEmail;
+	private JComboBox comboBox;
+	private JComboBox comboBox_1;
+	private JTable table;
 
 	/**
 	 * Create the panel.
 	 */
 	public AbaCadastroCliente() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{45, 63, 65, 63, 108, 85, 0};
+		gridBagLayout.rowHeights = new int[]{20, 20, 20, 20, 20, 20, 20, 20, 23, 0, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JLabel lblId = new JLabel("Id");
@@ -36,14 +44,16 @@ public class AbaCadastroCliente extends JPanel {
 		gbc_lblId.gridy = 0;
 		add(lblId, gbc_lblId);
 		
-		textField = new JTextField();
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.insets = new Insets(0, 0, 5, 0);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 0;
-		add(textField, gbc_textField);
-		textField.setColumns(10);
+		txtId = new JTextField();
+		txtId.setColumns(10);
+		GridBagConstraints gbc_txtId = new GridBagConstraints();
+		gbc_txtId.anchor = GridBagConstraints.NORTH;
+		gbc_txtId.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtId.insets = new Insets(0, 0, 5, 0);
+		gbc_txtId.gridwidth = 5;
+		gbc_txtId.gridx = 1;
+		gbc_txtId.gridy = 0;
+		add(txtId, gbc_txtId);
 		
 		JLabel lblNome = new JLabel("Nome");
 		GridBagConstraints gbc_lblNome = new GridBagConstraints();
@@ -53,14 +63,16 @@ public class AbaCadastroCliente extends JPanel {
 		gbc_lblNome.gridy = 1;
 		add(lblNome, gbc_lblNome);
 		
-		textField_1 = new JTextField();
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.gridx = 1;
-		gbc_textField_1.gridy = 1;
-		add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		txtNome = new JTextField();
+		txtNome.setColumns(10);
+		GridBagConstraints gbc_txtNome = new GridBagConstraints();
+		gbc_txtNome.anchor = GridBagConstraints.NORTH;
+		gbc_txtNome.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtNome.insets = new Insets(0, 0, 5, 0);
+		gbc_txtNome.gridwidth = 5;
+		gbc_txtNome.gridx = 1;
+		gbc_txtNome.gridy = 1;
+		add(txtNome, gbc_txtNome);
 		
 		JLabel lblTelefone = new JLabel("Telefone");
 		GridBagConstraints gbc_lblTelefone = new GridBagConstraints();
@@ -70,31 +82,35 @@ public class AbaCadastroCliente extends JPanel {
 		gbc_lblTelefone.gridy = 2;
 		add(lblTelefone, gbc_lblTelefone);
 		
-		textField_2 = new JTextField();
-		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-		gbc_textField_2.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_2.gridx = 1;
-		gbc_textField_2.gridy = 2;
-		add(textField_2, gbc_textField_2);
-		textField_2.setColumns(10);
+		txtTelefone = new JTextField();
+		txtTelefone.setColumns(10);
+		GridBagConstraints gbc_txtTelefone = new GridBagConstraints();
+		gbc_txtTelefone.anchor = GridBagConstraints.NORTH;
+		gbc_txtTelefone.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtTelefone.insets = new Insets(0, 0, 5, 0);
+		gbc_txtTelefone.gridwidth = 5;
+		gbc_txtTelefone.gridx = 1;
+		gbc_txtTelefone.gridy = 2;
+		add(txtTelefone, gbc_txtTelefone);
 		
 		JLabel lblCidade = new JLabel("Endere\u00E7o");
 		GridBagConstraints gbc_lblCidade = new GridBagConstraints();
-		gbc_lblCidade.anchor = GridBagConstraints.EAST;
+		gbc_lblCidade.anchor = GridBagConstraints.WEST;
 		gbc_lblCidade.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCidade.gridx = 0;
 		gbc_lblCidade.gridy = 3;
 		add(lblCidade, gbc_lblCidade);
 		
-		textField_3 = new JTextField();
-		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
-		gbc_textField_3.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_3.gridx = 1;
-		gbc_textField_3.gridy = 3;
-		add(textField_3, gbc_textField_3);
-		textField_3.setColumns(10);
+		txtEndereco = new JTextField();
+		txtEndereco.setColumns(10);
+		GridBagConstraints gbc_txtEndereco = new GridBagConstraints();
+		gbc_txtEndereco.anchor = GridBagConstraints.NORTH;
+		gbc_txtEndereco.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtEndereco.insets = new Insets(0, 0, 5, 0);
+		gbc_txtEndereco.gridwidth = 5;
+		gbc_txtEndereco.gridx = 1;
+		gbc_txtEndereco.gridy = 3;
+		add(txtEndereco, gbc_txtEndereco);
 		
 		JLabel lblCidade_1 = new JLabel("Cidade");
 		GridBagConstraints gbc_lblCidade_1 = new GridBagConstraints();
@@ -104,14 +120,16 @@ public class AbaCadastroCliente extends JPanel {
 		gbc_lblCidade_1.gridy = 4;
 		add(lblCidade_1, gbc_lblCidade_1);
 		
-		textField_4 = new JTextField();
-		GridBagConstraints gbc_textField_4 = new GridBagConstraints();
-		gbc_textField_4.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_4.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_4.gridx = 1;
-		gbc_textField_4.gridy = 4;
-		add(textField_4, gbc_textField_4);
-		textField_4.setColumns(10);
+		txtCidade = new JTextField();
+		txtCidade.setColumns(10);
+		GridBagConstraints gbc_txtCidade = new GridBagConstraints();
+		gbc_txtCidade.anchor = GridBagConstraints.NORTH;
+		gbc_txtCidade.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtCidade.insets = new Insets(0, 0, 5, 0);
+		gbc_txtCidade.gridwidth = 5;
+		gbc_txtCidade.gridx = 1;
+		gbc_txtCidade.gridy = 4;
+		add(txtCidade, gbc_txtCidade);
 		
 		JLabel lblEstado = new JLabel("Estado");
 		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
@@ -121,14 +139,15 @@ public class AbaCadastroCliente extends JPanel {
 		gbc_lblEstado.gridy = 5;
 		add(lblEstado, gbc_lblEstado);
 		
-		textField_5 = new JTextField();
-		GridBagConstraints gbc_textField_5 = new GridBagConstraints();
-		gbc_textField_5.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_5.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_5.gridx = 1;
-		gbc_textField_5.gridy = 5;
-		add(textField_5, gbc_textField_5);
-		textField_5.setColumns(10);
+		comboBox = new JComboBox();
+		GridBagConstraints gbc_comboBox = new GridBagConstraints();
+		gbc_comboBox.anchor = GridBagConstraints.NORTH;
+		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBox.gridwidth = 5;
+		gbc_comboBox.gridx = 1;
+		gbc_comboBox.gridy = 5;
+		add(comboBox, gbc_comboBox);
 		
 		JLabel lblEmail = new JLabel("Email");
 		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
@@ -138,31 +157,78 @@ public class AbaCadastroCliente extends JPanel {
 		gbc_lblEmail.gridy = 6;
 		add(lblEmail, gbc_lblEmail);
 		
-		textField_6 = new JTextField();
-		GridBagConstraints gbc_textField_6 = new GridBagConstraints();
-		gbc_textField_6.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_6.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_6.gridx = 1;
-		gbc_textField_6.gridy = 6;
-		add(textField_6, gbc_textField_6);
-		textField_6.setColumns(10);
+		txtEmail = new JTextField();
+		txtEmail.setColumns(10);
+		GridBagConstraints gbc_txtEmail = new GridBagConstraints();
+		gbc_txtEmail.anchor = GridBagConstraints.NORTH;
+		gbc_txtEmail.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtEmail.insets = new Insets(0, 0, 5, 0);
+		gbc_txtEmail.gridwidth = 5;
+		gbc_txtEmail.gridx = 1;
+		gbc_txtEmail.gridy = 6;
+		add(txtEmail, gbc_txtEmail);
 		
 		JLabel lblGenero = new JLabel("Genero");
 		GridBagConstraints gbc_lblGenero = new GridBagConstraints();
 		gbc_lblGenero.anchor = GridBagConstraints.EAST;
-		gbc_lblGenero.insets = new Insets(0, 0, 0, 5);
+		gbc_lblGenero.insets = new Insets(0, 0, 5, 5);
 		gbc_lblGenero.gridx = 0;
 		gbc_lblGenero.gridy = 7;
 		add(lblGenero, gbc_lblGenero);
 		
-		textField_7 = new JTextField();
-		GridBagConstraints gbc_textField_7 = new GridBagConstraints();
-		gbc_textField_7.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_7.gridx = 1;
-		gbc_textField_7.gridy = 7;
-		add(textField_7, gbc_textField_7);
-		textField_7.setColumns(10);
+		comboBox_1 = new JComboBox();
+		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
+		gbc_comboBox_1.anchor = GridBagConstraints.NORTH;
+		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox_1.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBox_1.gridwidth = 5;
+		gbc_comboBox_1.gridx = 1;
+		gbc_comboBox_1.gridy = 7;
+		add(comboBox_1, gbc_comboBox_1);
+		
+		JButton btnSalvar = new JButton("Salvar");
+		GridBagConstraints gbc_btnSalvar = new GridBagConstraints();
+		gbc_btnSalvar.anchor = GridBagConstraints.NORTHWEST;
+		gbc_btnSalvar.insets = new Insets(0, 0, 5, 5);
+		gbc_btnSalvar.gridx = 1;
+		gbc_btnSalvar.gridy = 8;
+		add(btnSalvar, gbc_btnSalvar);
+		
+		JButton btnAlterar = new JButton("Alterar");
+		GridBagConstraints gbc_btnAlterar = new GridBagConstraints();
+		gbc_btnAlterar.anchor = GridBagConstraints.NORTHWEST;
+		gbc_btnAlterar.insets = new Insets(0, 0, 5, 5);
+		gbc_btnAlterar.gridx = 2;
+		gbc_btnAlterar.gridy = 8;
+		add(btnAlterar, gbc_btnAlterar);
+		
+		JButton btnExcluir = new JButton("Excluir");
+		GridBagConstraints gbc_btnExcluir = new GridBagConstraints();
+		gbc_btnExcluir.anchor = GridBagConstraints.NORTHWEST;
+		gbc_btnExcluir.insets = new Insets(0, 0, 5, 5);
+		gbc_btnExcluir.gridx = 3;
+		gbc_btnExcluir.gridy = 8;
+		add(btnExcluir, gbc_btnExcluir);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
+		gbc_btnCancelar.insets = new Insets(0, 0, 5, 0);
+		gbc_btnCancelar.anchor = GridBagConstraints.NORTHWEST;
+		gbc_btnCancelar.gridx = 5;
+		gbc_btnCancelar.gridy = 8;
+		add(btnCancelar, gbc_btnCancelar);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.gridwidth = 6;
+		gbc_scrollPane.insets = new Insets(0, 0, 0, 5);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 9;
+		add(scrollPane, gbc_scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
 
 	}
-
 }

@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 public class TelaPrincipal extends JFrame {
 
 	private JPanel contentPane;
+	private JTabbedPane tabbedPane;
 
 	/**
 	 * Launch the application.
@@ -54,6 +55,9 @@ public class TelaPrincipal extends JFrame {
 			}
 
 			private void abrirTela() {
+				TelaCadastroCliente telaCadastroCliente = new TelaCadastroCliente();
+				telaCadastroCliente.setCloseAction(e -> tabbedPane.remove(telaCadastroCliente));
+				tabbedPane.addTab("Cadastro Cliente ", telaCadastroCliente);
 				
 			}
 		});
@@ -93,7 +97,7 @@ public class TelaPrincipal extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 	}
 
