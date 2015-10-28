@@ -67,6 +67,17 @@ public class TelaPrincipal extends JFrame {
 		mnCadastros.add(mntmUsuario);
 		
 		JMenuItem mntmProduto = new JMenuItem("Produto");
+		mntmProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abrirTelaProduto();
+			}
+
+			private void abrirTelaProduto() {
+				TelaCadastroProduto telaCadastroProduto = new TelaCadastroProduto();
+				telaCadastroProduto.setCloseAction(e -> tabbedPane.remove(telaCadastroProduto));
+				tabbedPane.addTab("Cadastro Produto ", telaCadastroProduto);
+			}
+		});
 		mnCadastros.add(mntmProduto);
 		
 		JMenu mnVendas = new JMenu("Vendas");
