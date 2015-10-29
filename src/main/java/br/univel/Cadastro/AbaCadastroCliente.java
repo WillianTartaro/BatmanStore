@@ -8,11 +8,15 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.text.html.HTMLEditorKit.Parser;
 import br.univel.Cliente;
+import br.univel.Estado;
+import br.univel.Genero;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -31,6 +35,7 @@ public class AbaCadastroCliente extends JPanel {
 	private JTable table;
 	
 	private TableModel model = new TableModel();
+	
 
 	/**
 	 * Create the panel.
@@ -204,6 +209,8 @@ public class AbaCadastroCliente extends JPanel {
 				c.setEndereco(txtEndereco.getText());
 				c.setCidade(txtCidade.getText());
 				c.setEmail(txtEmail.getText());
+				c.setEstado((Estado) comboBox.getSelectedItem());
+				c.setGenero((Genero) comboBox_1.getSelectedItem());
 				
 				
 				model.adicionarNoModel(c);
@@ -252,6 +259,14 @@ public class AbaCadastroCliente extends JPanel {
 		
 		table = new JTable(model);
 		scrollPane.setViewportView(table);
+		
+		Estado[] estados = Estado.values();
+		ComboBoxModel estado = new DefaultComboBoxModel(estados);
+		comboBox.setModel(estado);
+		
+		Genero[] generos = Genero.values();
+		ComboBoxModel genero = new DefaultComboBoxModel(generos);
+		comboBox_1.setModel(genero);
 
 	}
 }
