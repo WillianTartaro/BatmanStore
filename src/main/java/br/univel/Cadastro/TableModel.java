@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
-
 import br.univel.Cliente;
 
 public class TableModel extends AbstractTableModel {
@@ -21,6 +20,29 @@ public class TableModel extends AbstractTableModel {
 	public int getRowCount() {
 		// TODO Auto-generated method stub
 		return lista.size();
+	}
+	
+	@Override
+	public String getColumnName(int col) {
+		switch (col) {
+		case 0:
+			return "Id";
+		case 1:
+			return "Nome";
+		case 2:
+			return "Telefone";
+		case 3:
+			return "Endereço";
+		case 4:
+			return "Cidade";
+		case 5:
+			return "Estado";
+		case 6:
+			return "Email";
+		case 7:
+			return "Genero";
+		}
+		return "erro";
 	}
 
 	@Override
@@ -48,7 +70,12 @@ public class TableModel extends AbstractTableModel {
 		
 		
 	}
+	public void adicionarNoModel(Cliente c) {
+	this.lista.add(c);
+	int row = this.lista.size() -1;
 	
+	super.fireTableDataChanged();
 	
+	}
 
 }

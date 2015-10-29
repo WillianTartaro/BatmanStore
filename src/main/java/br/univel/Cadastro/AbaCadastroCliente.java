@@ -12,7 +12,6 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.text.html.HTMLEditorKit.Parser;
-
 import br.univel.Cliente;
 
 import javax.swing.JScrollPane;
@@ -30,6 +29,8 @@ public class AbaCadastroCliente extends JPanel {
 	private JComboBox comboBox;
 	private JComboBox comboBox_1;
 	private JTable table;
+	
+	private TableModel model = new TableModel();
 
 	/**
 	 * Create the panel.
@@ -204,6 +205,9 @@ public class AbaCadastroCliente extends JPanel {
 				c.setCidade(txtCidade.getText());
 				c.setEmail(txtEmail.getText());
 				
+				
+				model.adicionarNoModel(c);
+				
 			}
 		});
 		GridBagConstraints gbc_btnSalvar = new GridBagConstraints();
@@ -246,7 +250,7 @@ public class AbaCadastroCliente extends JPanel {
 		gbc_scrollPane.gridy = 9;
 		add(scrollPane, gbc_scrollPane);
 		
-		table = new JTable();
+		table = new JTable(model);
 		scrollPane.setViewportView(table);
 
 	}

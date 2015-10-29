@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -17,6 +18,8 @@ public class TelaPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private JTabbedPane tabbedPane;
+	
+	private TableModel model = new TableModel();
 
 	/**
 	 * Launch the application.
