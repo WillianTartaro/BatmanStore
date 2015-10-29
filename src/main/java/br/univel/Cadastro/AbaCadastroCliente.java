@@ -11,8 +11,14 @@ import javax.swing.JButton;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.text.html.HTMLEditorKit.Parser;
+
+import br.univel.Cliente;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AbaCadastroCliente extends JPanel {
 	private JTextField txtId;
@@ -187,6 +193,19 @@ public class AbaCadastroCliente extends JPanel {
 		add(comboBox_1, gbc_comboBox_1);
 		
 		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Cliente c = new Cliente();
+				
+				c.setId(Integer.parseInt(txtId.getText()));
+				c.setNome(txtNome.getText());
+				c.setTelefone(txtTelefone.getText());
+				c.setEndereco(txtEndereco.getText());
+				c.setCidade(txtCidade.getText());
+				c.setEmail(txtEmail.getText());
+				
+			}
+		});
 		GridBagConstraints gbc_btnSalvar = new GridBagConstraints();
 		gbc_btnSalvar.anchor = GridBagConstraints.NORTHWEST;
 		gbc_btnSalvar.insets = new Insets(0, 0, 5, 5);
