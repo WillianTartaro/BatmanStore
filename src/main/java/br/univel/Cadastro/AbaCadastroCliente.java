@@ -14,6 +14,8 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.text.html.HTMLEditorKit.Parser;
+
+import br.univel.BancoDeDados;
 import br.univel.Cliente;
 import br.univel.Estado;
 import br.univel.Genero;
@@ -21,6 +23,8 @@ import br.univel.Genero;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.nio.channels.spi.AbstractInterruptibleChannel;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class AbaCadastroCliente extends JPanel {
@@ -214,7 +218,7 @@ public class AbaCadastroCliente extends JPanel {
 				
 				
 				model.adicionarNoModel(c);
-				
+	
 			}
 		});
 		GridBagConstraints gbc_btnSalvar = new GridBagConstraints();
