@@ -218,6 +218,15 @@ public class AbaCadastroCliente extends JPanel {
 				
 				
 				model.adicionarNoModel(c);
+				
+				try {
+					BancoDeDados banco = new BancoDeDados();
+					banco.GravarCliente(c);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 	
 			}
 		});
