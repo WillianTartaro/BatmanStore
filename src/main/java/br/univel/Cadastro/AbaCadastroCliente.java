@@ -26,6 +26,8 @@ import java.awt.event.ActionListener;
 import java.nio.channels.spi.AbstractInterruptibleChannel;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class AbaCadastroCliente extends JPanel {
 	private JTextField txtId;
@@ -227,6 +229,17 @@ public class AbaCadastroCliente extends JPanel {
 					e.printStackTrace();
 				}
 				
+				txtId.setText("");
+				txtNome.setText("");
+				txtTelefone.setText("");
+				txtEndereco.setText("");
+				txtCidade.setText("");
+				txtEmail.setText("");
+				comboBox.setSelectedItem(null);
+				comboBox_1.setSelectedItem(null);
+				
+				
+				
 	
 			}
 		});
@@ -246,6 +259,12 @@ public class AbaCadastroCliente extends JPanel {
 		add(btnAlterar, gbc_btnAlterar);
 		
 		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+			}
+		});
 		GridBagConstraints gbc_btnExcluir = new GridBagConstraints();
 		gbc_btnExcluir.anchor = GridBagConstraints.NORTHWEST;
 		gbc_btnExcluir.insets = new Insets(0, 0, 5, 5);
@@ -271,7 +290,29 @@ public class AbaCadastroCliente extends JPanel {
 		add(scrollPane, gbc_scrollPane);
 		
 		table = new JTable(model);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					CarregarDaTabela(model.getLista().get(table.getSelectedRow()));
+				}
+			}
+
+			private void CarregarDaTabela(Cliente cliente) {
+				txtId.setText(Integer.toString(cliente.getId()));
+				txtNome.setText(cliente.getNome());
+				txtTelefone.setText(cliente.getTelefone());
+				txtEndereco.setText(cliente.getEndereco());
+				txtCidade.setText(cliente.getCidade());
+				txtEmail.setText(cliente.getEmail());
+				comboBox.setSelectedItem(cliente.getEstado());
+				comboBox_1.setSelectedItem(cliente.getGenero());
+				
+			}
+		});
 		scrollPane.setViewportView(table);
+		
+		
 		
 		Estado[] estados = Estado.values();
 		ComboBoxModel estado = new DefaultComboBoxModel(estados);

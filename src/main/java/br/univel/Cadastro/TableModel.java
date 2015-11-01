@@ -10,6 +10,17 @@ public class TableModel extends AbstractTableModel {
 	
 	private List<Cliente> lista = new ArrayList<Cliente>();
 	
+	
+	
+	public List<Cliente> getLista() {
+		return lista;
+	}
+
+	public void setLista(List<Cliente> lista) {
+		this.lista = lista;
+		this.fireTableDataChanged();
+	}
+
 	@Override
 	public int getColumnCount() {
 		// TODO Auto-generated method stub

@@ -27,7 +27,7 @@ public class BancoDeDados {
 		}
 		
 		public void GravarCliente(Cliente cliente) throws SQLException{
-			PreparedStatement ps = con.prepareStatement("INSERT INTO CLIENTE (CLIENTEID, NOME, TELEFONE, ENDERECO, CIDADE, EMAIL) VALUES (?, ?, ?, ?, ?, ?)");
+			PreparedStatement ps = con.prepareStatement("INSERT INTO CLIENTE (ID, NOME, TELEFONE, ENDERECO, CIDADE, EMAIL) VALUES (?, ?, ?, ?, ?, ?)");
 		
 			ps.setInt(1, cliente.getId());
 			ps.setString(2, cliente.getNome());
