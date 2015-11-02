@@ -11,7 +11,17 @@ import br.univel.Produto;
 public class TableModelProduto extends AbstractTableModel {
 
 private List<Produto> lista2 = new ArrayList<Produto>();
+
 	
+	public List<Produto> getLista2() {
+	return lista2;
+}
+
+public void setLista2(List<Produto> lista2) {
+	this.lista2 = lista2;
+	this.fireTableDataChanged();
+}
+
 	@Override
 	public int getColumnCount() {
 		// TODO Auto-generated method stub

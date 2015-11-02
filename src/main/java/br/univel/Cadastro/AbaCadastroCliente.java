@@ -42,6 +42,8 @@ public class AbaCadastroCliente extends JPanel {
 	
 	private TableModel model = new TableModel();
 	
+	
+	
 
 	/**
 	 * Create the panel.

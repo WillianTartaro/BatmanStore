@@ -18,6 +18,8 @@ import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class AbaCadastroProduto extends JPanel {
 	private JTextField txtId;
@@ -166,6 +168,7 @@ public class AbaCadastroProduto extends JPanel {
 				p.setCodigo(Integer.parseInt(txtCodigo.getText()));
 				p.setDescricao(txtDescricao.getText());
 				p.setUnidade(txtUnidade.getText());
+				p.setCategoria(txtCategoria.getText());
 				String a = txtCusto.getText();
 				BigDecimal b = new BigDecimal(a);
 				p.setCusto(b);
@@ -175,6 +178,14 @@ public class AbaCadastroProduto extends JPanel {
 				p.setMargemLucro(d);
 				
 				model2.adicionarNoModel(p);
+				
+				txtId.setText("");
+				txtCodigo.setText("");
+				txtDescricao.setText("");
+				txtUnidade.setText("");
+				txtCategoria.setText("");
+				txtCusto.setText("");
+				txtLucro.setText("");
 				
 			}
 		});
@@ -228,6 +239,23 @@ public class AbaCadastroProduto extends JPanel {
 		add(scrollPane, gbc_scrollPane);
 		
 		table = new JTable(model2);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					CarregarDaTabelaProduto(model2.getLista2().get(table.getSelectedRow()));
+				}
+			}
+
+			private void CarregarDaTabelaProduto(Produto produto) {
+				txtId.setText(Integer.toString(produto.getId()));
+				txtCodigo.setText(Integer.toString(produto.getCodigo()));
+				txtDescricao.setText(produto.getDescricao());
+				txtUnidade.setText(produto.getUnidade());
+				txtCategoria.setText(produto.getCategoria());
+
+			}
+		});
 		scrollPane.setViewportView(table);
 
 	}

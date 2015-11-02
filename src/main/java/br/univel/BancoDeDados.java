@@ -21,7 +21,7 @@ public class BancoDeDados {
 			try {
 				con = DriverManager.getConnection(url, user, pass);
 				System.out.println("Conexão Aberta!");
-			} catch (Exception e) {
+			} catch (SQLException e) {
 				System.out.println("Não Foi Possivel Fazer a Conexão!");
 			}
 		}
