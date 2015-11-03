@@ -14,7 +14,7 @@ public class BancoDeDados {
 		}
 
 		private void AbrirConexao() throws SQLException {
-			String url = "jdbc:postgresql://localhost:5432/BatStore";
+			String url = "jdbc:postgresql://localhost:5432/BatmanStore";
 			String user = "postgres";
 			String pass = "123Willi@n";
 			
@@ -26,22 +26,28 @@ public class BancoDeDados {
 			}
 		}
 		
-		public void GravarCliente(Cliente cliente) throws SQLException{
-			PreparedStatement ps = con.prepareStatement("INSERT INTO Cliente( Id, Nome, Telefone, Endereco, Cidade, Email) VALUES (?, ?, ?, ?, ?, ?)");
+		public void GravarCliente(Cliente c){
+			PreparedStatement ps;
+			try {
+				//ps = con.prepareStatement("INSERT INTO Cliente( Id, Nome, Telefone, Endereco, Cidade, Email) VALUES (?, ?, ?, ?, ?, ?)");
+				ps = con.prepareStatement("INSERT INTO CLIENTE( ID, NOME, TELEFONE, ENDERECO, CIDADE, EMAIL) VALUES (?, ?, ?, ?, ?, ?)");
+				ps.setInt(1, c.getId());
+				ps.setString(2, c.getNome());
+				ps.setString(3, c.getTelefone());
+				ps.setString(4, c.getEndereco());
+				ps.setString(5, c.getCidade());
+				ps.setString(6, c.getEmail());
+			
+				ps.executeUpdate();
+				
+
+				ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		
 			
-			ps.setInt(1, cliente.getId());
-			ps.setString(2, cliente.getNome());
-			ps.setString(3, cliente.getTelefone());
-			ps.setString(4, cliente.getEndereco());
-			ps.setString(5, cliente.getCidade());
-			ps.setString(6, cliente.getEmail());
-		
-			System.out.println("Chegou");
-			ps.executeUpdate();
-			System.out.println("Passou");
-
-			ps.close();
 		}
 
 }
