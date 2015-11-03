@@ -6,12 +6,16 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import br.univel.Estado;
 import br.univel.Produto;
+import br.univel.Unidade;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -20,13 +24,13 @@ import java.math.BigDecimal;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JComboBox;
 
 public class AbaCadastroProduto extends JPanel {
 	private JTextField txtId;
 	private JTextField txtCodigo;
 	private JTextField txtCategoria;
 	private JTextField txtDescricao;
-	private JTextField txtUnidade;
 	private JTextField txtCusto;
 	private JTable table;
 	
@@ -128,16 +132,13 @@ public class AbaCadastroProduto extends JPanel {
 		gbc_lblNewLabel_4.gridy = 4;
 		add(lblNewLabel_4, gbc_lblNewLabel_4);
 		
-		txtUnidade = new JTextField();
-		txtUnidade.setColumns(10);
-		GridBagConstraints gbc_txtUnidade = new GridBagConstraints();
-		gbc_txtUnidade.anchor = GridBagConstraints.NORTH;
-		gbc_txtUnidade.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtUnidade.insets = new Insets(0, 0, 5, 0);
-		gbc_txtUnidade.gridwidth = 5;
-		gbc_txtUnidade.gridx = 1;
-		gbc_txtUnidade.gridy = 4;
-		add(txtUnidade, gbc_txtUnidade);
+		JComboBox comboBox = new JComboBox();
+		GridBagConstraints gbc_comboBox = new GridBagConstraints();
+		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox.gridx = 1;
+		gbc_comboBox.gridy = 4;
+		add(comboBox, gbc_comboBox);
 		
 		JLabel lblMarge = new JLabel("Custo");
 		GridBagConstraints gbc_lblMarge = new GridBagConstraints();
@@ -167,7 +168,7 @@ public class AbaCadastroProduto extends JPanel {
 				p.setId(Integer.parseInt(txtId.getText()));
 				p.setCodigo(Integer.parseInt(txtCodigo.getText()));
 				p.setDescricao(txtDescricao.getText());
-				p.setUnidade(txtUnidade.getText());
+				p.setUnidade((Unidade) comboBox.getSelectedItem());
 				p.setCategoria(txtCategoria.getText());
 				String a = txtCusto.getText();
 				BigDecimal b = new BigDecimal(a);
@@ -182,7 +183,7 @@ public class AbaCadastroProduto extends JPanel {
 				txtId.setText("");
 				txtCodigo.setText("");
 				txtDescricao.setText("");
-				txtUnidade.setText("");
+				comboBox.setSelectedItem(null);
 				txtCategoria.setText("");
 				txtCusto.setText("");
 				txtLucro.setText("");
@@ -251,12 +252,19 @@ public class AbaCadastroProduto extends JPanel {
 				txtId.setText(Integer.toString(produto.getId()));
 				txtCodigo.setText(Integer.toString(produto.getCodigo()));
 				txtDescricao.setText(produto.getDescricao());
-				txtUnidade.setText(produto.getUnidade());
+				comboBox.setSelectedItem(produto.getUnidade());
 				txtCategoria.setText(produto.getCategoria());
 
 			}
 		});
 		scrollPane.setViewportView(table);
+		
+//		Estado[] estados = Estado.values();
+//		ComboBoxModel estado = new DefaultComboBoxModel(estados);
+//		comboBox.setModel(estado);
 
+		Unidade[] unidades = Unidade.values();
+		ComboBoxModel unidade = new DefaultComboBoxModel(unidades);
+		comboBox.setModel(unidade);
 	}
 }

@@ -1,4 +1,4 @@
-package br.univel.Cadastro;
+ package br.univel.Cadastro;
 
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
@@ -221,7 +221,7 @@ public class AbaCadastroCliente extends JPanel {
 				c.setGenero((Genero) comboBox_1.getSelectedItem());
 				
 				
-				model.adicionarNoModel(c);
+				
 				
 				try {
 					BancoDeDados banco = new BancoDeDados();
@@ -230,7 +230,16 @@ public class AbaCadastroCliente extends JPanel {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				model.adicionarNoModel(c);
 				
+				LimpaCampos();
+				
+				
+				
+	
+			}
+
+			private void LimpaCampos() {
 				txtId.setText("");
 				txtNome.setText("");
 				txtTelefone.setText("");
@@ -239,10 +248,6 @@ public class AbaCadastroCliente extends JPanel {
 				txtEmail.setText("");
 				comboBox.setSelectedItem(null);
 				comboBox_1.setSelectedItem(null);
-				
-				
-				
-	
 			}
 		});
 		GridBagConstraints gbc_btnSalvar = new GridBagConstraints();
