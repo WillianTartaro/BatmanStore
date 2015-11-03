@@ -13,6 +13,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import br.univel.BancoDeDados;
 import br.univel.Estado;
 import br.univel.Produto;
 import br.univel.Unidade;
@@ -21,6 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -179,6 +181,14 @@ public class AbaCadastroProduto extends JPanel {
 				p.setMargemLucro(d);
 				
 				model2.adicionarNoModel(p);
+				
+				try {
+					BancoDeDados banco2 = new BancoDeDados();
+					banco2.GravarProduto(p);
+				} catch (SQLException e) {
+					// TODO: handle exception
+				}
+				
 				
 				txtId.setText("");
 				txtCodigo.setText("");

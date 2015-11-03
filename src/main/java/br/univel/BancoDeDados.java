@@ -50,4 +50,26 @@ public class BancoDeDados {
 			
 		}
 
+		public void GravarProduto(Produto p) {
+			PreparedStatement ps;
+			
+			try {
+				ps = con.prepareStatement("INSERT INTO produto( id, codigo, categoria, descricao) VALUES (?, ?, ?, ?)");
+				ps.setInt(1, p.getId());
+				ps.setInt(2, p.getCodigo());
+				ps.setString(3, p.getCategoria());
+				ps.setString(4, p.getDescricao());
+				
+				ps.executeUpdate();
+				
+
+				ps.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
 }
