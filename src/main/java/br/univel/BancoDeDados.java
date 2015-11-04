@@ -30,13 +30,15 @@ public class BancoDeDados {
 			PreparedStatement ps;
 			try {
 				//ps = con.prepareStatement("INSERT INTO Cliente( Id, Nome, Telefone, Endereco, Cidade, Email) VALUES (?, ?, ?, ?, ?, ?)");
-				ps = con.prepareStatement("INSERT INTO CLIENTE( ID, NOME, TELEFONE, ENDERECO, CIDADE, EMAIL) VALUES (?, ?, ?, ?, ?, ?)");
+				ps = con.prepareStatement("INSERT INTO CLIENTE( ID, NOME, TELEFONE, ENDERECO, CIDADE, EMAIL, ESTADO, GENERO) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 				ps.setInt(1, c.getId());
 				ps.setString(2, c.getNome());
 				ps.setString(3, c.getTelefone());
 				ps.setString(4, c.getEndereco());
 				ps.setString(5, c.getCidade());
 				ps.setString(6, c.getEmail());
+				ps.setString(7, c.getEstado().toString());
+				ps.setString(8, c.getGenero().toString());
 			
 				ps.executeUpdate();
 				
@@ -47,6 +49,14 @@ public class BancoDeDados {
 				e.printStackTrace();
 			}
 		
+			
+		}
+		
+		public void ExcluirCliente(Cliente c){
+			
+		}
+		
+		public void ExcluirProduto(Produto p){
 			
 		}
 
