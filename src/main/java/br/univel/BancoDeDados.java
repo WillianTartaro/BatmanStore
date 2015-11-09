@@ -11,6 +11,7 @@ public class BancoDeDados {
 	
 		public BancoDeDados() throws SQLException{
 			AbrirConexao();
+			System.out.println("Quero");
 		}
 
 		private void AbrirConexao() throws SQLException {
