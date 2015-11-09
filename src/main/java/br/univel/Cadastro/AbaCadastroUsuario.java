@@ -6,6 +6,10 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.sql.ResultSet;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -129,12 +133,9 @@ public class AbaCadastroUsuario extends JPanel {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		
 
 		
-		try {
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+		
 	}
 }

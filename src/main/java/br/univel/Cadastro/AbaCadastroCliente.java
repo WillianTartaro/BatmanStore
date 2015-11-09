@@ -44,7 +44,6 @@ public class AbaCadastroCliente extends JPanel {
 	private TableModel model = new TableModel();
 	
 	
-	
 
 	/**
 	 * Create the panel.
@@ -232,7 +231,7 @@ public class AbaCadastroCliente extends JPanel {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				model.adicionarNoModel(c);
+				//model.adicionarNoModel(c);
 				
 				LimpaCampos();
 				

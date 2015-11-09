@@ -29,6 +29,8 @@ public class BancoDeDados {
 			}
 		}
 		
+	
+		
 		public void GravarCliente(Cliente c){
 			PreparedStatement ps;
 			try {
@@ -89,6 +91,19 @@ public class BancoDeDados {
 				e.printStackTrace();
 			}
 
+		}
+		
+	public List<Cliente> PuxarInfo() throws SQLException{
+			List<Cliente> lista = new ArrayList<Cliente>();
+			PreparedStatement ps = con.prepareStatement("SELECT id FROM cliente");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()){
+				Cliente c = new Cliente();
+				c.setId(rs.getInt("id"));
+				
+				lista.add(c);
+			}
+			return lista;
 		}
 		
 		public List<Cliente> clienteTabela() throws SQLException {
