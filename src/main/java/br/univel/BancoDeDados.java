@@ -3,7 +3,10 @@ package br.univel;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BancoDeDados {
 	
@@ -11,7 +14,6 @@ public class BancoDeDados {
 	
 		public BancoDeDados() throws SQLException{
 			AbrirConexao();
-			System.out.println("Quero");
 		}
 
 		private void AbrirConexao() throws SQLException {
@@ -53,12 +55,18 @@ public class BancoDeDados {
 			
 		}
 		
-		public void ExcluirCliente(Cliente c){
-			
+		public void ExcluirCliente(Cliente c) throws SQLException{
+			PreparedStatement ps = con.prepareStatement("delete from cliente where id = ?");
+			ps.setInt(1, c.getId());
+			ps.executeUpdate();
+			ps.close();
 		}
 		
-		public void ExcluirProduto(Produto p){
-			
+		public void ExcluirProduto(Produto p) throws SQLException{
+			PreparedStatement ps = con.prepareStatement("delete from produto where id = ?");
+			ps.setInt(1, p.getId());
+			ps.executeUpdate();
+			ps.close();
 		}
 
 		public void GravarProduto(Produto p) {
@@ -82,5 +90,45 @@ public class BancoDeDados {
 			}
 
 		}
+		
+		public List<Cliente> clienteTabela() throws SQLException {
+			List<Cliente> lista = new ArrayList<Cliente>();
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM CLIENTE");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Cliente c = new Cliente();
+				c.setId(rs.getInt("id"));
+				c.setNome(rs.getString("nome"));
+				c.setEndereco(rs.getString("endereco"));
+				c.setTelefone(rs.getString("telefone"));
+				c.setCidade(rs.getString("cidade"));
+				c.setEmail(rs.getString("email"));
+			//	c.setEstado(Estado.valueOf(rs.getString("estado")));
+				//c.setGenero(Genero.valueOf(rs.getString(rs.getString("genero"))));
+				
+				lista.add(c);
+			}
+			
+			return lista;
+		}
+		
+		public List<Produto> produtoTabela() throws SQLException {
+			List<Produto> lista = new ArrayList<Produto>();
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM PRODUTO");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Produto p = new Produto();
+				p.setId(rs.getInt("id"));
+				p.setCodigo(rs.getInt("codigo"));
+				p.setDescricao(rs.getString("descricao"));
+				p.setCategoria(rs.getString("categoria"));
+
+				
+				lista.add(p);
+			}
+			
+			return lista;
+		}
+
 
 }

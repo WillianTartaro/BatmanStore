@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import br.univel.BancoDeDados;
+import br.univel.Cliente;
 import br.univel.Estado;
 import br.univel.Produto;
 import br.univel.Unidade;
@@ -23,6 +24,7 @@ import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -38,7 +40,7 @@ public class AbaCadastroProduto extends JPanel {
 	
 	private TableModelProduto model2 = new TableModelProduto();
 	private JTextField txtLucro;
-
+	
 	/**
 	 * Create the panel.
 	 */
@@ -49,6 +51,7 @@ public class AbaCadastroProduto extends JPanel {
 		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
+		
 		
 		JLabel lblNewLabel = new JLabel("Id");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -185,6 +188,7 @@ public class AbaCadastroProduto extends JPanel {
 				try {
 					BancoDeDados banco2 = new BancoDeDados();
 					banco2.GravarProduto(p);
+					AtualizaTabel();
 				} catch (SQLException e) {
 					// TODO: handle exception
 				}
@@ -234,6 +238,30 @@ public class AbaCadastroProduto extends JPanel {
 		add(btnNewButton, gbc_btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Excluir");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				excluirProduto();
+			}
+
+			private void excluirProduto() {
+				String idproduto = txtId.getText();
+				Produto p = new Produto();
+				p.setId(Integer.parseInt(idproduto));
+				
+				try {
+					BancoDeDados banco = new BancoDeDados();
+					banco.ExcluirProduto(p);
+					AtualizaTabel();
+				} catch (SQLException e2) {
+					// TODO: handle exception
+				}
+				
+			}
+
+		
+
+			
+		});
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 0);
 		gbc_btnNewButton_1.anchor = GridBagConstraints.NORTHWEST;
@@ -276,5 +304,11 @@ public class AbaCadastroProduto extends JPanel {
 		Unidade[] unidades = Unidade.values();
 		ComboBoxModel unidade = new DefaultComboBoxModel(unidades);
 		comboBox.setModel(unidade);
+	}
+	
+	private void AtualizaTabel() throws SQLException {
+		BancoDeDados banco = new BancoDeDados();
+		model2.setLista2((ArrayList<Produto>) banco.produtoTabela());
+		
 	}
 }

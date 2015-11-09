@@ -7,11 +7,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import br.univel.BancoDeDados;
+import br.univel.Produto;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class TelaPrincipal extends JFrame {
@@ -87,6 +91,8 @@ public class TelaPrincipal extends JFrame {
 				abrirTelaProduto();
 			}
 
+
+
 			private void abrirTelaProduto() {
 				TelaCadastroProduto telaCadastroProduto = new TelaCadastroProduto();
 				telaCadastroProduto.setCloseAction(e -> tabbedPane.remove(telaCadastroProduto));
@@ -126,5 +132,7 @@ public class TelaPrincipal extends JFrame {
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 	}
+	
+
 
 }

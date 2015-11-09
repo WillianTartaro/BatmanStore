@@ -5,12 +5,20 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.sql.ResultSet;
+
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import br.univel.BancoDeDados;
+import br.univel.Cliente;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -122,5 +130,11 @@ public class AbaCadastroUsuario extends JPanel {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 
+		
+		try {
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 }

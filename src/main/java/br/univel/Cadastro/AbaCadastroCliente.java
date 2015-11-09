@@ -1,4 +1,4 @@
- package br.univel.Cadastro;
+package br.univel.Cadastro;
 
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
@@ -25,6 +25,7 @@ import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.nio.channels.spi.AbstractInterruptibleChannel;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -226,6 +227,7 @@ public class AbaCadastroCliente extends JPanel {
 				try {
 					BancoDeDados banco = new BancoDeDados();
 					banco.GravarCliente(c);
+					AtualizaTabel();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -268,9 +270,26 @@ public class AbaCadastroCliente extends JPanel {
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+					excluirCliente();
 				
 			}
+
+			private void excluirCliente() {
+				String idcliente = txtId.getText();
+				Cliente c = new Cliente();
+				c.setId(Integer.parseInt(idcliente));
+				
+				try {
+					BancoDeDados banco = new BancoDeDados();
+					banco.ExcluirCliente(c);
+					AtualizaTabel();
+				} catch (SQLException e2) {
+					// TODO: handle exception
+				}
+				
+			}
+
+			
 		});
 		GridBagConstraints gbc_btnExcluir = new GridBagConstraints();
 		gbc_btnExcluir.anchor = GridBagConstraints.NORTHWEST;
@@ -329,5 +348,9 @@ public class AbaCadastroCliente extends JPanel {
 		ComboBoxModel genero = new DefaultComboBoxModel(generos);
 		comboBox_1.setModel(genero);
 
+	}
+	private void AtualizaTabel() throws SQLException {
+		BancoDeDados banco = new BancoDeDados();
+		model.setLista((ArrayList<Cliente>) banco.clienteTabela());
 	}
 }
