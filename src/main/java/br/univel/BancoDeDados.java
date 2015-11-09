@@ -95,12 +95,12 @@ public class BancoDeDados {
 		
 	public List<Cliente> PuxarInfo() throws SQLException{
 			List<Cliente> lista = new ArrayList<Cliente>();
-			PreparedStatement ps = con.prepareStatement("SELECT id FROM cliente");
+			PreparedStatement ps = con.prepareStatement("SELECT id,nome FROM cliente");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()){
 				Cliente c = new Cliente();
 				c.setId(rs.getInt("id"));
-				
+				c.setNome(rs.getString("nome"));
 				lista.add(c);
 			}
 			return lista;

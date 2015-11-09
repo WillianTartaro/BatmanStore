@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Vector;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -50,7 +51,18 @@ public class AbaCadastroUsuario extends JPanel {
 		gbc_lblIdCliente.gridy = 0;
 		add(lblIdCliente, gbc_lblIdCliente);
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox comboBox = null;
+		try {
+			BancoDeDados banco = new BancoDeDados();
+			List<Cliente> Quero = banco.PuxarInfo();
+			Vector<String> v = new Vector<String>();
+			for (int i = 0; i < Quero.size(); i++) {
+				v.add(Quero.get(i).getId()+" - "+Quero.get(i).getNome());
+			}
+			comboBox = new JComboBox<>(v);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.anchor = GridBagConstraints.NORTH;
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
