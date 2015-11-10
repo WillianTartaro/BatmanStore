@@ -146,7 +146,7 @@ public class BancoDeDados {
 
 		public List<Produto> PuxarInfoProduto() throws SQLException {
 			List<Produto> lista2 = new ArrayList<Produto>();
-			PreparedStatement ps = con.prepareStatement("SELECT nome FROM produto");
+			PreparedStatement ps = con.prepareStatement("SELECT descricao FROM produto");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()){
 				Produto p = new Produto();
