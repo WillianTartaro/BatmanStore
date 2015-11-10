@@ -34,7 +34,6 @@ public class BancoDeDados {
 		public void GravarCliente(Cliente c){
 			PreparedStatement ps;
 			try {
-				//ps = con.prepareStatement("INSERT INTO Cliente( Id, Nome, Telefone, Endereco, Cidade, Email) VALUES (?, ?, ?, ?, ?, ?)");
 				ps = con.prepareStatement("INSERT INTO CLIENTE( ID, NOME, TELEFONE, ENDERECO, CIDADE, EMAIL, ESTADO, GENERO) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 				ps.setInt(1, c.getId());
 				ps.setString(2, c.getNome());
@@ -118,8 +117,8 @@ public class BancoDeDados {
 				c.setTelefone(rs.getString("telefone"));
 				c.setCidade(rs.getString("cidade"));
 				c.setEmail(rs.getString("email"));
-			//	c.setEstado(Estado.valueOf(rs.getString("estado")));
-				//c.setGenero(Genero.valueOf(rs.getString(rs.getString("genero"))));
+//				c.setEstado(Estado.valueOf(rs.getString("estado")));
+//				c.setGenero(Genero.valueOf(rs.getString(rs.getString("genero"))));
 				
 				lista.add(c);
 			}
@@ -143,6 +142,34 @@ public class BancoDeDados {
 			}
 			
 			return lista;
+		}
+
+		public List<Produto> PuxarInfoProduto() throws SQLException {
+			List<Produto> lista2 = new ArrayList<Produto>();
+			PreparedStatement ps = con.prepareStatement("SELECT nome FROM produto");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()){
+				Produto p = new Produto();
+				p.setDescricao(rs.getString("descricao"));
+				lista2.add(p);
+			}
+			
+			
+			return lista2;
+		}
+		
+		public List<Cliente> PuxarInfoCliente() throws SQLException {
+			List<Cliente> lista3 = new ArrayList<Cliente>();
+			PreparedStatement ps = con.prepareStatement("SELECT nome FROM cliente");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()){
+				Cliente c = new Cliente();
+				c.setNome(rs.getString("nome"));
+				lista3.add(c);
+			}
+			
+			
+			return lista3;
 		}
 
 
