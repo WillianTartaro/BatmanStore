@@ -81,12 +81,6 @@ public class TableModel extends AbstractTableModel {
 		
 		
 	}
-	public void adicionarNoModel(Cliente c) {
-	this.lista.add(c);
-	int row = this.lista.size() -1;
-	
-	super.fireTableDataChanged();
-	
-	}
+
 
 }

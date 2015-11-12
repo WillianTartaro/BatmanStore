@@ -337,7 +337,7 @@ public class AbaCadastroCliente extends JPanel {
 		});
 		scrollPane.setViewportView(table);
 		
-		
+		AtualizaTabel();
 		
 		Estado[] estados = Estado.values();
 		ComboBoxModel estado = new DefaultComboBoxModel(estados);
@@ -348,8 +348,13 @@ public class AbaCadastroCliente extends JPanel {
 		comboBox_1.setModel(genero);
 
 	}
-	private void AtualizaTabel() throws SQLException {
-		BancoDeDados banco = new BancoDeDados();
-		model.setLista((ArrayList<Cliente>) banco.clienteTabela());
+	private void AtualizaTabel(){
+		try {
+			BancoDeDados banco = new BancoDeDados();
+			model.setLista((ArrayList<Cliente>) banco.clienteTabela());
+		} catch (SQLException e) {
+			// TODO: handle exception
+		}
+		
 	}
 }

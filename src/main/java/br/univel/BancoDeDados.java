@@ -34,15 +34,15 @@ public class BancoDeDados {
 		public void GravarCliente(Cliente c){
 			PreparedStatement ps;
 			try {
-				ps = con.prepareStatement("INSERT INTO CLIENTE( ID, NOME, TELEFONE, ENDERECO, CIDADE, EMAIL, ESTADO, GENERO) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+				ps = con.prepareStatement("INSERT INTO CLIENTE( ID, NOME, TELEFONE, ENDERECO, CIDADE, EMAIL, estado, genero) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 				ps.setInt(1, c.getId());
 				ps.setString(2, c.getNome());
 				ps.setString(3, c.getTelefone());
 				ps.setString(4, c.getEndereco());
 				ps.setString(5, c.getCidade());
 				ps.setString(6, c.getEmail());
-				ps.setString(7, c.getEstado().toString());
-				ps.setString(8, c.getGenero().toString());
+				ps.setObject(7, c.getEstado().toString());
+				ps.setObject(8, c.getGenero().toString());
 			
 				ps.executeUpdate();
 				
@@ -74,11 +74,13 @@ public class BancoDeDados {
 			PreparedStatement ps;
 			
 			try {
-				ps = con.prepareStatement("INSERT INTO produto( id, codigo, categoria, descricao) VALUES (?, ?, ?, ?)");
+				ps = con.prepareStatement("INSERT INTO produto( id, codigo, categoria, descricao, custo, lucro) VALUES (?, ?, ?, ?, ?, ?)");
 				ps.setInt(1, p.getId());
 				ps.setInt(2, p.getCodigo());
 				ps.setString(3, p.getCategoria());
 				ps.setString(4, p.getDescricao());
+				ps.setBigDecimal(5, p.getCusto());
+				ps.setBigDecimal(6, p.getMargemLucro());
 				
 				ps.executeUpdate();
 				
@@ -92,14 +94,31 @@ public class BancoDeDados {
 
 		}
 		
+		public void GravarUsuario(Usuario u){
+			PreparedStatement ps;
+			
+			try {
+				ps = con.prepareStatement("INSERT INTO usuario(idcliente, idusuario, senha)VALUES (?, ?, ?)");
+				ps.setInt(1, u.getIdc());
+				ps.setInt(2, u.getId());
+				ps.setString(3, u.getSenha());
+				
+				ps.executeUpdate();
+				ps.close();
+			} catch (SQLException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		}
+		
 	public List<Cliente> PuxarInfo() throws SQLException{
 			List<Cliente> lista = new ArrayList<Cliente>();
-			PreparedStatement ps = con.prepareStatement("SELECT id,nome FROM cliente");
+			PreparedStatement ps = con.prepareStatement("SELECT idFROM cliente");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()){
 				Cliente c = new Cliente();
 				c.setId(rs.getInt("id"));
-				c.setNome(rs.getString("nome"));
+				//c.setNome(rs.getString("nome"));
 				lista.add(c);
 			}
 			return lista;
@@ -117,8 +136,8 @@ public class BancoDeDados {
 				c.setTelefone(rs.getString("telefone"));
 				c.setCidade(rs.getString("cidade"));
 				c.setEmail(rs.getString("email"));
-//				c.setEstado(Estado.valueOf(rs.getString("estado")));
-//				c.setGenero(Genero.valueOf(rs.getString(rs.getString("genero"))));
+				//c.setEstado(Estado.valueOf(rs.getString("estado")));
+				//c.setGenero(Genero.valueOf(rs.getString(rs.getString("genero"))));
 				
 				lista.add(c);
 			}
@@ -171,6 +190,8 @@ public class BancoDeDados {
 			
 			return lista3;
 		}
+		
+		
 
 
 }

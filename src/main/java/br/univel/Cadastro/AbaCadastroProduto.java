@@ -175,6 +175,7 @@ public class AbaCadastroProduto extends JPanel {
 				p.setDescricao(txtDescricao.getText());
 				p.setUnidade((Unidade) comboBox.getSelectedItem());
 				p.setCategoria(txtCategoria.getText());
+				
 				String a = txtCusto.getText();
 				BigDecimal b = new BigDecimal(a);
 				p.setCusto(b);
