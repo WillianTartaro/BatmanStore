@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -34,6 +35,7 @@ public class AbaCadastroUsuario extends JPanel {
 	private JTextField txtId;
 	private JTextField txtSenha;
 	private JTable table;
+	private JComboBox comboBox;
 
 	/**
 	 * Create the panel.
@@ -54,7 +56,8 @@ public class AbaCadastroUsuario extends JPanel {
 		gbc_lblIdCliente.gridy = 0;
 		add(lblIdCliente, gbc_lblIdCliente);
 		
-		JComboBox comboBox = null;
+		//JComboBox comboBox = null;
+		
 		try {
 			BancoDeDados banco = new BancoDeDados();
 			List<Cliente> Quero = banco.PuxarInfo();
@@ -63,7 +66,7 @@ public class AbaCadastroUsuario extends JPanel {
 				v.add(Quero.get(i).getId());
 			}
 			comboBox = new JComboBox<>(v);
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			// TODO: handle exception
 		}
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
@@ -118,9 +121,18 @@ public class AbaCadastroUsuario extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				Usuario u = new Usuario();
 				
-			//	u.setIdc(Integer.parseInt((String) comboBox.getSelectedItem()));
+				Object idCliente1 = comboBox.getSelectedItem();
+			  	
+				u.setIdc((Integer) idCliente1);
 				u.setId(Integer.parseInt(txtId.getText()));
 				u.setSenha(txtSenha.getText());
+				
+				try {
+					BancoDeDados banco = new BancoDeDados();
+					banco.GravarUsuario(u);
+				} catch (SQLException e) {
+					// TODO: handle exception
+				}
 			}
 		});
 		GridBagConstraints gbc_btnSalvar = new GridBagConstraints();
