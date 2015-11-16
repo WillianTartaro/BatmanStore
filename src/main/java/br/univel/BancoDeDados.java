@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
+
+import javax.swing.JComboBox;
 
 public class BancoDeDados {
 	
@@ -52,8 +55,7 @@ public class BancoDeDados {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		
-			
+	
 		}
 		
 		public void ExcluirCliente(Cliente c) throws SQLException{
@@ -73,6 +75,12 @@ public class BancoDeDados {
 		public void ExcluirUsuario(Usuario u) throws SQLException{
 			PreparedStatement ps = con.prepareStatement("delete from usuario where idusuario = ?");
 			ps.setInt(1, u.getId());
+			ps.executeUpdate();
+			ps.close();
+		}
+		public void ExcluirVenda(Venda v) throws SQLException{
+			PreparedStatement ps = con.prepareStatement("delete from venda where idvenda = ?");
+			ps.setInt(1, v.getIdvenda());
 			ps.executeUpdate();
 			ps.close();
 		}
@@ -115,6 +123,22 @@ public class BancoDeDados {
 			} catch (SQLException e) {
 				// TODO: handle exception
 				e.printStackTrace();
+			}
+		}
+		
+		public void GravarVenda(Venda v){
+			PreparedStatement ps;
+			try {
+				ps = con.prepareStatement("INSERT INTO venda(nomecliente, nomeproduto, quantidade, idvenda)VALUES (?, ?, ?, ?)");
+				ps.setString(1, v.getNomeCliente());
+				ps.setString(2, v.getNomeProduto());
+				ps.setInt(3, v.getQuantidade());
+				ps.setInt(4, v.getIdvenda());
+				
+				ps.executeUpdate();
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();			
 			}
 		}
 		
@@ -180,6 +204,23 @@ public class BancoDeDados {
 				
 				lista.add(p);
 			}
+			
+			return lista;
+		}
+		
+		public List<Venda> vendaTabela() throws SQLException{
+			List<Venda> lista = new ArrayList<Venda>();
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM venda");
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				Venda v = new Venda();
+				v.setNomeCliente(rs.getString("nomecliente"));
+				v.setNomeProduto(rs.getString("nomeproduto"));
+				v.setQuantidade(rs.getInt("quantidade"));
+				v.setIdvenda(rs.getInt("idvenda"));
+				lista.add(v);
+			}
+			
 			
 			return lista;
 		}
