@@ -7,6 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -30,6 +31,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class AbaCadastroUsuario extends JPanel {
 	private JTextField txtId;
@@ -37,6 +40,8 @@ public class AbaCadastroUsuario extends JPanel {
 	private JTable table;
 	private JComboBox comboBox;
 
+	private TableModelUsuario model = new TableModelUsuario();
+	
 	/**
 	 * Create the panel.
 	 */
@@ -130,10 +135,13 @@ public class AbaCadastroUsuario extends JPanel {
 				try {
 					BancoDeDados banco = new BancoDeDados();
 					banco.GravarUsuario(u);
+					atualizaTable();
 				} catch (SQLException e) {
-					// TODO: handle exception
+					e.printStackTrace();
 				}
 			}
+
+			
 		});
 		GridBagConstraints gbc_btnSalvar = new GridBagConstraints();
 		gbc_btnSalvar.anchor = GridBagConstraints.NORTHEAST;
@@ -151,6 +159,25 @@ public class AbaCadastroUsuario extends JPanel {
 		add(btnAlterar, gbc_btnAlterar);
 		
 		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				excluirUsuario();
+			}
+
+			private void excluirUsuario() {
+				String idusuario = txtId.getText();
+				Usuario u = new Usuario();
+				u.setId(Integer.parseInt(idusuario));
+				
+				try {
+					BancoDeDados banco = new BancoDeDados();
+					banco.ExcluirUsuario(u);
+					atualizaTable();
+				} catch (SQLException e) {
+					// TODO: handle exception
+				}
+			}
+		});
 		GridBagConstraints gbc_btnExcluir = new GridBagConstraints();
 		gbc_btnExcluir.insets = new Insets(0, 0, 5, 0);
 		gbc_btnExcluir.anchor = GridBagConstraints.NORTHWEST;
@@ -167,11 +194,38 @@ public class AbaCadastroUsuario extends JPanel {
 		gbc_scrollPane.gridy = 4;
 		add(scrollPane, gbc_scrollPane);
 		
-		table = new JTable();
+		table = new JTable(model);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				CarregaTabela(model.getLista3().get(table.getSelectedRow()));
+			}
+
+			private void CarregaTabela(Usuario usuario) {
+				
+				comboBox.setSelectedItem(usuario.getIdc());
+				txtId.setText(Integer.toString(usuario.getId()));
+				txtSenha.setText(usuario.getSenha());
+				
+			}
+		});
 		scrollPane.setViewportView(table);
 		
+		atualizaTable();
+
+
 
 		
 		
+	}
+
+	private void atualizaTable() {
+
+		try {
+			BancoDeDados banco = new BancoDeDados();
+			model.setLista3((ArrayList<Usuario>) banco.usuarioTabela());
+		} catch (SQLException e) {
+			
+		}
 	}
 }

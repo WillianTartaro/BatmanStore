@@ -298,6 +298,7 @@ public class AbaCadastroProduto extends JPanel {
 		});
 		scrollPane.setViewportView(table);
 		
+		AtualizaTabel();
 //		Estado[] estados = Estado.values();
 //		ComboBoxModel estado = new DefaultComboBoxModel(estados);
 //		comboBox.setModel(estado);
@@ -307,9 +308,13 @@ public class AbaCadastroProduto extends JPanel {
 		comboBox.setModel(unidade);
 	}
 	
-	private void AtualizaTabel() throws SQLException {
-		BancoDeDados banco = new BancoDeDados();
-		model2.setLista2((ArrayList<Produto>) banco.produtoTabela());
+	private void AtualizaTabel(){
+		try {
+			BancoDeDados banco = new BancoDeDados();
+			model2.setLista2((ArrayList<Produto>) banco.produtoTabela());
+		} catch (SQLException e) {
+			// TODO: handle exception
+		}
 		
 	}
 }

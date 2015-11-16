@@ -41,8 +41,8 @@ public class BancoDeDados {
 				ps.setString(4, c.getEndereco());
 				ps.setString(5, c.getCidade());
 				ps.setString(6, c.getEmail());
-				ps.setObject(7, c.getEstado().toString());
-				ps.setObject(8, c.getGenero().toString());
+				ps.setString(7, c.getEstado().toString());
+				ps.setString(8, c.getGenero().toString());
 			
 				ps.executeUpdate();
 				
@@ -70,6 +70,13 @@ public class BancoDeDados {
 			ps.close();
 		}
 
+		public void ExcluirUsuario(Usuario u) throws SQLException{
+			PreparedStatement ps = con.prepareStatement("delete from usuario where idusuario = ?");
+			ps.setInt(1, u.getId());
+			ps.executeUpdate();
+			ps.close();
+		}
+		
 		public void GravarProduto(Produto p) {
 			PreparedStatement ps;
 			
@@ -124,6 +131,20 @@ public class BancoDeDados {
 			return lista;
 		}
 		
+		public List<Usuario> usuarioTabela() throws SQLException{
+			List<Usuario> lista = new ArrayList<Usuario>();
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM usuario");
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				Usuario u = new Usuario();
+				u.setIdc(rs.getInt("idcliente"));
+				u.setId(rs.getInt("idusuario"));
+				u.setSenha(rs.getString("senha"));
+				lista.add(u);
+			}
+			return lista;
+		}
+	
 		public List<Cliente> clienteTabela() throws SQLException {
 			List<Cliente> lista = new ArrayList<Cliente>();
 			PreparedStatement ps = con.prepareStatement("SELECT * FROM CLIENTE");
