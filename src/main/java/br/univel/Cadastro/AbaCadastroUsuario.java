@@ -198,7 +198,10 @@ public class AbaCadastroUsuario extends JPanel {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				CarregaTabela(model.getLista3().get(table.getSelectedRow()));
+				if (e.getClickCount() == 2) {
+					CarregaTabela(model.getLista3().get(table.getSelectedRow()));
+
+				}
 			}
 
 			private void CarregaTabela(Usuario usuario) {
