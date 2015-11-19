@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 public class BancoDeDados {
 	
@@ -251,6 +252,22 @@ public class BancoDeDados {
 			
 			
 			return lista3;
+		}
+
+		public void Validacao(int usuario, String senha, Runnable acaoOk) {
+			try {
+				PreparedStatement ps = con.prepareStatement("SELECT * FROM usuario WHERE idusuario = ? AND senha = ?");
+				ps.setInt(1, usuario);
+				ps.setString(2, senha);
+				ResultSet rs = ps.executeQuery();
+				if (rs.next()) {
+					acaoOk.run();
+				} else {
+					JOptionPane.showMessageDialog(null, "Usuario e/ou Senha Invalidos!");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		
