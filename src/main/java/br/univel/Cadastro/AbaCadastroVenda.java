@@ -163,7 +163,7 @@ public class AbaCadastroVenda extends JPanel {
 		
 		JLabel lblId = new JLabel("Id");
 		GridBagConstraints gbc_lblId = new GridBagConstraints();
-		gbc_lblId.anchor = GridBagConstraints.EAST;
+		gbc_lblId.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblId.insets = new Insets(0, 0, 5, 5);
 		gbc_lblId.gridx = 1;
 		gbc_lblId.gridy = 4;
@@ -177,6 +177,26 @@ public class AbaCadastroVenda extends JPanel {
 		gbc_txtId.gridy = 4;
 		add(txtId, gbc_txtId);
 		txtId.setColumns(10);
+		
+		JButton btnCalcular = new JButton("Calcular");
+		btnCalcular.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				calcularValorTotal();
+			}
+
+			private void calcularValorTotal() {
+				Venda v = new Venda();
+				
+				Object nomeCliente = comboBox.getSelectedItem();
+				v.setNomeCliente(nomeCliente.toString());
+			}
+		});
+		GridBagConstraints gbc_btnCalcular = new GridBagConstraints();
+		gbc_btnCalcular.anchor = GridBagConstraints.EAST;
+		gbc_btnCalcular.insets = new Insets(0, 0, 5, 5);
+		gbc_btnCalcular.gridx = 3;
+		gbc_btnCalcular.gridy = 4;
+		add(btnCalcular, gbc_btnCalcular);
 		GridBagConstraints gbc_btnSalvar = new GridBagConstraints();
 		gbc_btnSalvar.anchor = GridBagConstraints.NORTHWEST;
 		gbc_btnSalvar.insets = new Insets(0, 0, 5, 5);
