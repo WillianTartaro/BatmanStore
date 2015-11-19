@@ -47,7 +47,7 @@ public class TelaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaPrincipal() {
-		
+		System.out.println("quero");
 		blockLogin();
 		
 		setTitle("BatmanStore");
