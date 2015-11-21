@@ -253,7 +253,36 @@ public class BancoDeDados {
 			
 			return lista3;
 		}
+		
+		public List<Cliente> PuxarInfoCliente2() throws SQLException {
+			List<Cliente> lista3 = new ArrayList<Cliente>();
+			PreparedStatement ps = con.prepareStatement("SELECT telefone FROM cliente");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()){
+				Cliente c = new Cliente();
+				c.setTelefone(rs.getString("telefone"));
+				lista3.add(c);
+			}
+			
+			
+			return lista3;
+		}
 
+		
+		public List<Cliente> PuxarInfoCliente3() throws SQLException {
+			List<Cliente> lista3 = new ArrayList<Cliente>();
+			PreparedStatement ps = con.prepareStatement("SELECT email FROM cliente");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()){
+				Cliente c = new Cliente();
+				c.setEmail(rs.getString("email"));
+				lista3.add(c);
+			}
+			
+			
+			return lista3;
+		}
+		
 		public void Validacao(int usuario, String senha, Runnable acaoOk) {
 			try {
 				PreparedStatement ps = con.prepareStatement("SELECT * FROM usuario WHERE idusuario = ? AND senha = ?");
