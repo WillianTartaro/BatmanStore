@@ -21,7 +21,7 @@ import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 public class RelatorioCliente {
 	
 	private static final String OUT_PDF = "out.pdf";
-	private String arq = "C:\\Users\\Willian\\MyReports\\Wood.jasper";
+	private String arq = "C:\\Users\\Willian\\MyReports\\BatStore.jasper";
 
 		
 	public RelatorioCliente() throws SQLException {
@@ -33,8 +33,7 @@ public class RelatorioCliente {
 		try {
 
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("empresa", "Petrobras");
-			map.put("telefone", "123pim567pim");
+		
 
 			jp = JasperFillManager.fillReport(arq, map,
 					new JRTableModelDataSource(tableModel));
@@ -67,7 +66,7 @@ public class RelatorioCliente {
 
 	private TableModel getTableModel() throws SQLException {
 		BancoDeDados banco = new BancoDeDados();
-		banco.clienteTabela();
+		 //banco.clienteTabela();
 		String[] columnNames = { "Id", "Nome", "Telefone", "Email" };
 
 		String[][] data = { { banco.PuxarInfo().toString(), banco.PuxarInfoCliente().toString(), banco.PuxarInfoCliente2().toString(), banco.PuxarInfoCliente3().toString() } };
