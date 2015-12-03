@@ -136,8 +136,14 @@ public class TelaPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					
-					 new RelatorioCliente();
-				} catch (SQLException e) {
+					TelaRelatorioCliente telaRelatorioCliente = new TelaRelatorioCliente();
+					telaRelatorioCliente.setCloseAction(e -> tabbedPane.remove(telaRelatorioCliente));
+					tabbedPane.addTab("Relatorio Cliente", telaRelatorioCliente);
+					
+					
+					// new RelatorioCliente();
+					// new AbaRelatorioCliente();
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

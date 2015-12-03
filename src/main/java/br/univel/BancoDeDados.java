@@ -254,6 +254,23 @@ public class BancoDeDados {
 			return lista3;
 		}
 		
+		public List<Cliente> PuxarCidadeCliente() throws SQLException{
+			
+			List<Cliente> lista = new ArrayList<Cliente>();
+			PreparedStatement ps = con.prepareStatement("SELECT cidade FROM cliente");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Cliente c = new Cliente();
+				c.setCidade(rs.getString("cidade"));
+				lista.add(c);
+				
+			}
+			
+			return lista;
+			
+		}
+		
+		
 		public List<Cliente> PuxarInfoCliente2() throws SQLException {
 			List<Cliente> lista3 = new ArrayList<Cliente>();
 			PreparedStatement ps = con.prepareStatement("SELECT telefone FROM cliente");
