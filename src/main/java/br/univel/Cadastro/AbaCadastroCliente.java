@@ -206,6 +206,7 @@ public class AbaCadastroCliente extends JPanel {
 		gbc_comboBox_1.gridy = 7;
 		add(comboBox_1, gbc_comboBox_1);
 		
+		//Botao e metodo para salvar cliente.
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -240,16 +241,7 @@ public class AbaCadastroCliente extends JPanel {
 	
 			}
 
-			private void LimpaCampos() {
-				txtId.setText("");
-				txtNome.setText("");
-				txtTelefone.setText("");
-				txtEndereco.setText("");
-				txtCidade.setText("");
-				txtEmail.setText("");
-				comboBox.setSelectedItem(null);
-				comboBox_1.setSelectedItem(null);
-			}
+			
 		});
 		GridBagConstraints gbc_btnSalvar = new GridBagConstraints();
 		gbc_btnSalvar.anchor = GridBagConstraints.NORTHWEST;
@@ -259,6 +251,37 @@ public class AbaCadastroCliente extends JPanel {
 		add(btnSalvar, gbc_btnSalvar);
 		
 		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+					AlterarCliente();
+			}
+
+			private void AlterarCliente() {
+				
+				Cliente c = new Cliente();
+				
+				c.setId(Integer.parseInt(txtId.getText()));
+				c.setNome(txtNome.getText());
+				c.setTelefone(txtTelefone.getText());
+				c.setEndereco(txtEndereco.getText());
+				c.setCidade(txtCidade.getText());
+				c.setEmail(txtEmail.getText());
+				c.setEstado((Estado) comboBox.getSelectedItem());
+				c.setGenero((Genero) comboBox_1.getSelectedItem());
+				
+				try {
+					BancoDeDados banco = new BancoDeDados();
+					banco.AlteraCliente(c);
+				} catch (SQLException e) {
+					// TODO: handle exception
+				}
+				
+				LimpaCampos();
+				AtualizaTabel();
+				
+				
+			}
+		});
 		GridBagConstraints gbc_btnAlterar = new GridBagConstraints();
 		gbc_btnAlterar.anchor = GridBagConstraints.NORTHWEST;
 		gbc_btnAlterar.insets = new Insets(0, 0, 5, 5);
@@ -273,6 +296,7 @@ public class AbaCadastroCliente extends JPanel {
 				
 			}
 
+			//Excluir Cliente
 			private void excluirCliente() {
 				String idcliente = txtId.getText();
 				Cliente c = new Cliente();
@@ -356,5 +380,16 @@ public class AbaCadastroCliente extends JPanel {
 			// TODO: handle exception
 		}
 		
+	}
+	
+	private void LimpaCampos() {
+		txtId.setText("");
+		txtNome.setText("");
+		txtTelefone.setText("");
+		txtEndereco.setText("");
+		txtCidade.setText("");
+		txtEmail.setText("");
+		comboBox.setSelectedItem(null);
+		comboBox_1.setSelectedItem(null);
 	}
 }

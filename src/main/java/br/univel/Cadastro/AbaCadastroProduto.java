@@ -231,6 +231,47 @@ public class AbaCadastroProduto extends JPanel {
 		add(btnSalvar, gbc_btnSalvar);
 		
 		JButton btnNewButton = new JButton("Alterar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AlterarProduto();
+			}
+
+			private void AlterarProduto() {
+				Produto p = new Produto();
+				
+				p.setId(Integer.parseInt(txtId.getText()));
+				p.setCodigo(Integer.parseInt(txtCodigo.getText()));
+				p.setDescricao(txtDescricao.getText());
+				p.setUnidade((Unidade) comboBox.getSelectedItem());
+				p.setCategoria(txtCategoria.getText());
+				
+				String a = txtCusto.getText();
+				BigDecimal b = new BigDecimal(a);
+				p.setCusto(b);
+				
+				String c = txtLucro.getText();
+				BigDecimal d = new BigDecimal(c);
+				p.setMargemLucro(d);
+				
+				try {
+					BancoDeDados banco2 = new BancoDeDados();
+					banco2.AlteraProduto(p);
+					AtualizaTabel();
+					
+				} catch (SQLException e) {
+					// TODO: handle exception
+				}
+				
+				txtId.setText("");
+				txtCodigo.setText("");
+				txtDescricao.setText("");
+				comboBox.setSelectedItem(null);
+				txtCategoria.setText("");
+				txtCusto.setText("");
+				txtLucro.setText("");
+				
+			}
+		});
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.anchor = GridBagConstraints.NORTHWEST;
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
@@ -256,6 +297,8 @@ public class AbaCadastroProduto extends JPanel {
 				} catch (SQLException e2) {
 					// TODO: handle exception
 				}
+				
+				
 				
 			}
 

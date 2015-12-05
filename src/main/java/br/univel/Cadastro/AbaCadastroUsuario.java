@@ -151,6 +151,30 @@ public class AbaCadastroUsuario extends JPanel {
 		add(btnSalvar, gbc_btnSalvar);
 		
 		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AlteraUsuario();
+			}
+
+			private void AlteraUsuario() {
+				Usuario u = new Usuario();
+				
+				Object idCliente1 = comboBox.getSelectedItem();
+			  	
+				u.setIdc((Integer) idCliente1);
+				u.setId(Integer.parseInt(txtId.getText()));
+				u.setSenha(txtSenha.getText());
+				
+				try {
+					BancoDeDados banco = new BancoDeDados();
+					banco.AlterarUsuario(u);
+					atualizaTable();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			
+			}
+		});
 		GridBagConstraints gbc_btnAlterar = new GridBagConstraints();
 		gbc_btnAlterar.anchor = GridBagConstraints.NORTHWEST;
 		gbc_btnAlterar.insets = new Insets(0, 0, 5, 5);

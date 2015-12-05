@@ -324,8 +324,73 @@ public class BancoDeDados {
 				e.printStackTrace();
 			}
 		}
+
+		public void AlteraCliente(Cliente c) {
+			PreparedStatement ps;
+			try {
+				ps = con.prepareStatement("UPDATE cliente SET nome=?, telefone=?, endereco=?, cidade=?, email=?, estado=?, genero=? where id=?");
+				ps.setString(1, c.getNome());
+				ps.setString(2, c.getTelefone());
+				ps.setString(3, c.getEndereco());
+				ps.setString(4, c.getCidade());
+				ps.setString(5, c.getEmail());
+				ps.setString(6, c.getEstado().toString());
+				ps.setString(7, c.getGenero().toString());
+				ps.setInt(8, c.getId());
+			
+				
+				ps.executeUpdate();
+				ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+		}
 		
+		public void AlteraProduto(Produto p) {
+			PreparedStatement ps;
+			try {
+				ps = con.prepareStatement("UPDATE produto SET codigo=?, categoria=?, descricao=?, custo=?, lucro=? where id=?");
+				ps.setInt(1, p.getCodigo());
+				ps.setString(2, p.getCategoria());
+				ps.setString(3, p.getDescricao());
+				ps.setBigDecimal(4, p.getCusto());
+				ps.setBigDecimal(5, p.getMargemLucro());
+				ps.setInt(6, p.getId());
+				
+			
+				
+				ps.executeUpdate();
+				ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+		}
 		
+
+		public void AlterarUsuario(Usuario u){
+			PreparedStatement ps;
+			
+			try {
+				ps = con.prepareStatement("UPDATE usuario SET idcliente=?, senha=? where idusuario=?");
+				ps.setInt(1, u.getIdc());
+				ps.setString(2, u.getSenha());
+				ps.setInt(3, u.getId());
+				
+				ps.executeUpdate();
+				ps.close();
+			} catch (SQLException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		}
 
 
 }
