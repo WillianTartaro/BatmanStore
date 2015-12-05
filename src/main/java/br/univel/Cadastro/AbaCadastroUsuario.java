@@ -169,6 +169,7 @@ public class AbaCadastroUsuario extends JPanel {
 					BancoDeDados banco = new BancoDeDados();
 					banco.AlterarUsuario(u);
 					atualizaTable();
+					
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
