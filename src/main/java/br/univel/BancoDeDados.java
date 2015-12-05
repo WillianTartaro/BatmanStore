@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 public class BancoDeDados {
 	
-	private Connection con;
+	private static Connection con;
 	
 		public BancoDeDados() throws SQLException{
 			AbrirConexao();
@@ -34,6 +34,15 @@ public class BancoDeDados {
 		}
 		
 	
+		
+		public static Connection getConexao() throws SQLException{
+			if (con == null) {
+				new BancoDeDados();
+			}
+			
+			return con;
+			
+		}
 		
 		public void GravarCliente(Cliente c){
 			PreparedStatement ps;

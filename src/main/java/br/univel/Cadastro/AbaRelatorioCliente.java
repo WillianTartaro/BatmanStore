@@ -125,14 +125,6 @@ public class AbaRelatorioCliente extends JPanel {
 						jp = JasperFillManager.fillReport(arq, map,
 								new JRTableModelDataSource(tableModel));
 
-						// JasperViewer jasperViewer = new JasperViewer(jp);
-						//
-						// jasperViewer.setBounds(50, 50, 320, 240);
-						// jasperViewer.setLocationRelativeTo(null);
-						// jasperViewer.setExtendedState(JFrame.MAXIMIZED_BOTH);
-						//
-						// jasperViewer.setVisible(true);
-
 						JasperExportManager.exportReportToPdfFile(jp, OUT_PDF);
 
 						JOptionPane
@@ -153,7 +145,7 @@ public class AbaRelatorioCliente extends JPanel {
 
 				private TableModel getTableModel() throws SQLException {
 					BancoDeDados banco = new BancoDeDados();
-					 //banco.clienteTabela();
+					 
 					String[] columnNames = { "Id", "Nome", "Telefone", "Email" };
 				 
 						String[][] data = { {banco.PuxarInfo().toString(), banco.PuxarInfoCliente().toString(), banco.PuxarInfoCliente2().toString(), banco.PuxarInfoCliente3().toString() } };

@@ -140,9 +140,6 @@ public class TelaPrincipal extends JFrame {
 					telaRelatorioCliente.setCloseAction(e -> tabbedPane.remove(telaRelatorioCliente));
 					tabbedPane.addTab("Relatorio Cliente", telaRelatorioCliente);
 					
-					
-					// new RelatorioCliente();
-					// new AbaRelatorioCliente();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
